@@ -3,10 +3,12 @@ import matplotlib.pyplot as plt
 
 from umap import UMAP
 
+from lievis.metrics import frobenius_distance
+
 
 if __name__ == "__main__":
-    n = 1000
-    d = 10
+    n = 5000
+    d = 4
 
     rng = np.random.default_rng(42)
 
@@ -26,7 +28,7 @@ if __name__ == "__main__":
     X = np.asarray(X)
     y = np.asarray(y)
 
-    emb = UMAP()
+    emb = UMAP(metric=frobenius_distance)
     X_emb = emb.fit_transform(X)
 
     plt.scatter(X_emb[:, 0], X[:, 1], c=y)
