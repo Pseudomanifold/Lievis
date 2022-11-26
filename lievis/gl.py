@@ -30,7 +30,7 @@ if __name__ == "__main__":
     group = GeneralLinear(d)
 
     X = group.random_point(n)
-    y = np.asarray([np.linalg.det(M) for M in X])
+    y = np.asarray([np.linalg.norm(M) for M in X])
     #X = X.reshape(n, -1)
 
     emb = MDS(dissimilarity="precomputed")
