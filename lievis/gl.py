@@ -7,6 +7,7 @@ from geomstats.geometry.general_linear import GeneralLinear
 from sklearn.manifold import MDS
 
 import numba
+import umap
 
 @numba.njit
 def pairwise_numba(X):
@@ -20,7 +21,7 @@ def pairwise_numba(X):
     return D
 
 if __name__ == "__main__":
-    n = 50
+    n = 100
     d = 10
 
     rng = np.random.default_rng(42)
@@ -48,7 +49,7 @@ if __name__ == "__main__":
     y = np.asarray([np.linalg.norm(M) for M in X])
     z = np.asarray(z).ravel()
 
-    emb = MDS(dissimilarity="precomputed", verbose=True)
+    emb = umap.UMAP(metric="precomputed")
     #D = group.metric.dist_pairwise(X)
     D = pairwise_numba(X)
 

@@ -7,6 +7,7 @@ from geomstats.geometry.special_orthogonal import SpecialOrthogonal
 from lievis.metrics import frobenius_distance
 
 import numba
+import umap
 
 
 @numba.njit
@@ -23,7 +24,7 @@ def pairwise_numba(X):
 
 if __name__ == "__main__":
     n = 50
-    d = 20
+    d = 30
 
     rng = np.random.default_rng(42)
 
@@ -50,7 +51,7 @@ if __name__ == "__main__":
     y = np.asarray([np.linalg.norm(M) for M in X])
     z = np.asarray(z).ravel()
 
-    emb = MDS(dissimilarity="precomputed")
+    emb = umap.UMAP(metric="precomputed") #MDS(dissimilarity="precomputed")
     D = pairwise_numba(X)
     X_emb = emb.fit_transform(D)
 
